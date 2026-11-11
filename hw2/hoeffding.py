@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def run():
     flips = np.random.randint(0, 2, size = (1000, 10))
     nu_array = flips.mean(axis = 1)
-    return nu_array[0], nu_array[np.argmin(nu_array)], nu_array[random.randint(0, 999)]
+    return nu_array[0], nu_array.min(), nu_array[random.randint(0, 999)]
 
 size = 100000
 nu_one = np.zeros(size)
@@ -24,3 +24,5 @@ axes[1].set_title("Nu Min")
 axes[2].set_title("Nu Random")
 axes[0].set_ylabel("Fraction of runs")
 plt.show()
+
+print(np.mean(nu_min))
