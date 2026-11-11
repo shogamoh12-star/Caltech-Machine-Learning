@@ -10,7 +10,7 @@ Each homework is in its own folder with its own Python virtual environment:
 | Folder | Topic |
 |--------|-------|
 | `hw1/` | Perceptron Learning Algorithm |
-| `hw2/` | Hoeffding Inequality, Linear Regression |
+| `hw2/` | Hoeffding Inequality, Linear Regression, Nonlinear Transformation |
 
 ## Homeworks
 
@@ -72,6 +72,30 @@ Starting PLA from the Linear Regression weights cuts the number of iterations it
 needs to converge by a lot compared with HW1, where PLA started from all-zero
 weights. The regression weights already separate most of the points, so PLA only
 has to fix the few that are left.
+
+### HW2: Nonlinear Transformation
+
+`hw2/nonlinear.py` uses Linear Regression on a circular target,
+$f(x_1, x_2) = \text{sign}(x_1^2 + x_2^2 - 0.6)$, with N = 1,000 points in
+[-1, 1] × [-1, 1] and about 10% of the labels flipped as noise:
+
+- Fits Linear Regression on the raw features (1, x₁, x₂) and averages E_in over 1,000 runs
+- Transforms the features to (1, x₁, x₂, x₁x₂, x₁², x₂²), fits Linear Regression again, and averages the weights over 1,000 runs
+- Estimates E_out of each transformed hypothesis on 1,000 fresh noisy points and averages it
+
+#### Results
+
+From one run of the script:
+
+| | Output |
+|---|---|
+| Average E_in, raw features | ≈ 0.50 |
+| Average weights, transformed (w₀ … w₅) | ≈ (−0.99, 0.00, 0.00, 0.00, 1.56, 1.56) |
+| Average E_out, transformed | ≈ 0.13 |
+
+- **Without a transform** the classifier is no better than guessing (E_in ≈ 0.5, closest to **0.5**). A straight line can't separate the inside of a circle from the outside.
+- **With the transform** the hypothesis is roughly $\text{sign}(-1 + 1.5x_1^2 + 1.5x_2^2)$: the linear and cross terms average out to about 0. That is a circle of radius² ≈ 0.64, close to the target's 0.6.
+- **E_out with the transform** is ≈ 0.13, closest to **0.1**. Most of that error comes from the 10% label noise, which no hypothesis can fit.
 
 ## Running a homework
 
