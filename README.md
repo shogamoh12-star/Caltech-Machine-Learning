@@ -62,6 +62,12 @@ kind of data as HW1 (a random target line in [-1, 1] × [-1, 1]):
 
 #### Results
 
+Averages over 1,000 runs with N = 10:
+
+| E_in | E_out | PLA iterations |
+|------|-------|----------------|
+| ≈ 0.03 | ≈ 0.1 | ≈ 5 |
+
 Starting PLA from the Linear Regression weights cuts the number of iterations it
 needs to converge by a lot compared with HW1, where PLA started from all-zero
 weights. The regression weights already separate most of the points, so PLA only
