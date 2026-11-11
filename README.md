@@ -68,10 +68,16 @@ Averages over 1,000 runs with N = 10:
 |------|-------|----------------|
 | ≈ 0.03 | ≈ 0.1 | ≈ 5 |
 
-Starting PLA from the Linear Regression weights cuts the number of iterations it
-needs to converge by a lot compared with HW1, where PLA started from all-zero
-weights. The regression weights already separate most of the points, so PLA only
-has to fix the few that are left.
+Starting PLA from the Linear Regression weights roughly halves the number of
+iterations it needs to converge, compared with HW1:
+
+| PLA starting weights (N = 10, averaged over 1,000 runs) | Average iterations |
+|---|---|
+| All zeros (HW1, `hw1/perceptron.py`) | ≈ 9 |
+| Linear Regression weights (HW2) | ≈ 5 |
+
+The regression weights already separate most of the points, so PLA only has to
+fix the few that are left.
 
 ### HW2: Nonlinear Transformation
 
