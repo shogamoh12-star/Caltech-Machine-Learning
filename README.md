@@ -10,7 +10,7 @@ Each homework is in its own folder with its own Python virtual environment:
 | Folder | Topic |
 |--------|-------|
 | `hw1/` | Perceptron Learning Algorithm |
-| `hw2/` | Hoeffding Inequality |
+| `hw2/` | Hoeffding Inequality, Linear Regression |
 
 ## Homeworks
 
@@ -50,6 +50,22 @@ $\mathbb{P}(|\nu - \mu| > \varepsilon) \le 2e^{-2\varepsilon^2 N}$? **$c_1$ and 
 Both are fixed before the flips are seen, so each is a single bin. $c_{\min}$ is picked *after*
 seeing the outcomes, which pushes $\nu$ towards 0 and away from $\mu = 0.5$ far more often than
 the bound allows. That is the multiple-bin case, which needs a union-bound factor of $M = 1000$.
+
+### HW2: Linear Regression
+
+`hw2/lin_regression.py` uses Linear Regression for classification on the same
+kind of data as HW1 (a random target line in [-1, 1] × [-1, 1]):
+
+- `regression(N, plot)` labels N random points with the target, finds the weights with the pseudo-inverse, and returns E_in (fraction of training points misclassified) and E_out (estimated on 1,000 fresh points). With `plot=True` it draws the points, the target line and the hypothesis line
+- `pla(...)` runs the Perceptron Learning Algorithm starting from the regression weights instead of zeros, and counts the iterations until every point is classified correctly
+- The script repeats this 1,000 times with N = 10 and prints the average E_in, E_out and number of PLA iterations. Change the `regression(10, False)` call to `regression(100, False)` for N = 100
+
+#### Results
+
+Starting PLA from the Linear Regression weights cuts the number of iterations it
+needs to converge by a lot compared with HW1, where PLA started from all-zero
+weights. The regression weights already separate most of the points, so PLA only
+has to fix the few that are left.
 
 ## Running a homework
 
